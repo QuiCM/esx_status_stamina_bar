@@ -1,3 +1,5 @@
+--Stamina is a value between 0 and 100, however esx_status has a default StatusMax of 1,000,000
+--This means we'll need to adjust the player's stamina value to be comparable to StatusMax
 local scaleValue = Config.StatusMax / 100
 
 
@@ -25,7 +27,6 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(Config.StaminaTickRate)
-        --by default, this is a float value between 0 and 100 (0 being full stamina)
         local sprintStamRem = GetPlayerSprintStaminaRemaining(PlayerId())
 
         TriggerEvent('esx_status:set', 'stamina', (100.0 - sprintStamRem) * scaleValue)
